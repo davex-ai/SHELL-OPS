@@ -1,0 +1,26 @@
+#!/bin/bash
+set -euo pipefail
+
+log(){
+    echo "[$(date +'%d-%m-%d %H:%M:%S %a-%b-%c')] $1"
+        # echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1"
+
+}
+
+check_port(){
+    local host=$1
+    local port=$2
+    local service=$3
+
+    if nc -z "$host" "$port" 2>/dev/null; then
+    log "Servise is up and running on $host:$post"
+    return 0
+    else 
+    log "Sevice running on $host:$port is down"
+    return 1
+    fi
+}
+
+check_port "localhost" 5432 "PostgreSQL"
+check_port "http://localhost" 5173 "product"
+check_port "localhost" 6379 "Redis"

@@ -1,0 +1,19 @@
+#!/bin/bash
+set -euo pipefail
+
+# Read version from package.json (requires jq)
+VERSION=$(jq -r .version package.json)
+
+if [ -z "$VERSION" ]; then
+  echo "Could not read version from package.json"
+  exit 1
+fi
+
+# Check if tag already exists
+if git rev-parse "v$VERSION" >/dev/null 2>&1; then
+  echo "Tag v$VERSION already exists. Nothing to do."
+else
+  echo " Creating tag v$VERSION"
+  git tag "v$VERSION"
+  git push origin "v$VERSION"
+fi

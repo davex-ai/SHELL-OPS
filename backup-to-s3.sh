@@ -7,12 +7,11 @@ TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 ARCHIVE="backup-$TIMESTAMP.tar.gz"
 
 # Create archive
-tar -czf "/tmp/$ARCHIVE" "$BACKUP_DIR" explain this line better
+tar -czf "/tmp/$ARCHIVE" "$BACKUP_DIR"  
 
 # Upload to S3
-aws s3 cp "/tmp/$ARCHIVE" "s3://$BUCKET/" explain this line better
-
+aws s3 cp "/tmp/$ARCHIVE" "s3://$BUCKET/" 
 # Cleanup
-rm "/tmp/$ARCHIVE" explain this line better why are u removing tmp/
+rm "/tmp/$ARCHIVE"  
 
 echo " Backup uploaded to s3://$BUCKET/$ARCHIVE"

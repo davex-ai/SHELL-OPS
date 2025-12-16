@@ -1,4 +1,5 @@
 #!/bin/bash
+# Call the script with an argg e.g. ./deploy.sh prod
 ENV=${1:-"dev"}  # Default to 'dev' if no arg given
 APP_NAME="davex-api"
 VERSION="v1.2.0"
